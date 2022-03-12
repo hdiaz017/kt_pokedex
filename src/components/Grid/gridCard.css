@@ -1,0 +1,25 @@
+.grid_poke_cards {
+   background-color: #f4f7fa;
+   height: 100vh;
+   display: flex;
+   flex-direction: column;
+   font-family: 'Inter', sans-serif;
+   padding-left: 40px;
+   padding-right: 40px;
+}
+
+.grid_heading_filters {
+   margin: 100px 0px 50px 0px;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+
+.grid_filters {
+   display: flex;
+}
+
+.poke_filter {
+   display: flex;
+   flex-direction: column;
+}
