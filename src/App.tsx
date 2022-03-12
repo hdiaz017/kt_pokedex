@@ -2,8 +2,14 @@ import React from 'react';
 
 import './App.css';
 
+import { Navigation } from './router/Navigation';
+
 function App() {
-   return <>Pokedex</>;
+   return (
+      <>
+         <Navigation />
+      </>
+   );
 }
 
 export default App;

@@ -1,0 +1,47 @@
+#pokeball_link {
+   height: 40px;
+   margin-left: 40px;
+   /* border: 1px solid red; */
+}
+
+.pokeball_navbar {
+   height: 50px;
+   width: 100%;
+   background-color: #2f3a5c;
+   display: flex;
+   align-items: center;
+}
+
+.routes_navbar {
+   height: 150px;
+   background-color: #222531;
+   display: flex;
+   align-items: flex-end;
+}
+
+.routes {
+   display: flex;
+   align-items: center;
+   justify-content: flex-start;
+   list-style: none;
+   margin-bottom: 10px;
+   /* border: 1px solid red; */
+}
+
+li a {
+   font-family: 'Inter', sans-serif;
+   text-decoration: none;
+   color: #5a6075;
+   font-size: 30px;
+   font-weight: bold;
+   margin-right: 200px;
+   margin-left: 40px;
+}
+
+.nav_active {
+   color: white;
+   transition: all 0.3s ease-out;
+   border-bottom: 7px solid #f1c007;
+   /* border-radius: 50px; */
+   padding-bottom: 6px;
+}
