@@ -23,3 +23,10 @@
    display: flex;
    flex-direction: column;
 }
+
+.poke_cards {
+   display: flex;
+   flex-flow: wrap;
+
+   justify-content: space-between;
+}
