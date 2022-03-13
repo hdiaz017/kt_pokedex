@@ -23,7 +23,9 @@ export const GridCards = () => {
                </div>
             </div>
          </div>
-         <Card />
+         <div className='poke_cards'>
+            <Card />
+         </div>
       </div>
    );
 };

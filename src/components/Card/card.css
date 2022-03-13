@@ -14,11 +14,13 @@ img {
    background-color: white;
    overflow: hidden;
    transition: transform 500ms ease;
+   margin-bottom: 30px;
 }
 
 .pokecard:hover {
    transform: scale(1.05);
    background-color: #313543;
+   cursor: pointer;
 }
 
 .pokecard:hover .poke_info {
