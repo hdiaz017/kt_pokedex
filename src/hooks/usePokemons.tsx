@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 import { Pokemon } from '../interfaces/FetchPokemonInterfaces';
+import { PokemonContext } from '../context/PokemonContext';
 import {
    fetchAllPokemons,
    fetchAllDataPokemons,
@@ -8,8 +9,9 @@ import {
 
 export const usePokemons = () => {
    const [isLoading, setIsLoading] = useState(true);
-   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+   // const [pokemons, setPokemons] = useState<Pokemon[]>([]);
    // const pokemonData: FetchPokemonResponse[] = [];
+   const { addPokemons } = useContext(PokemonContext);
 
    useEffect(() => {
       fetchAllPokemons().then((pokemons) => {
@@ -21,12 +23,11 @@ export const usePokemons = () => {
          //    });
          // });
 
-         setPokemons(pokemons);
+         addPokemons(pokemons);
       });
    }, []);
 
    return {
       isLoading,
-      pokemons,
    };
 };

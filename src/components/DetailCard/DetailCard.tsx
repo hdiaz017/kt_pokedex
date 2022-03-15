@@ -1,36 +1,40 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { useParams } from 'react-router-dom';
+import { PokemonContext } from '../../context/PokemonContext';
 import pokeball from '../../img/pokeball_line.png';
 import './detailCard.css';
 
 export const DetailCard = () => {
+   const { pokemonState } = useContext(PokemonContext);
+   const { pokemons } = pokemonState;
+   const { id } = useParams();
+   const [pokemon] = pokemons.filter((p) => p.id.toString() === id);
+   const gen1Class = pokemon.generation === 1 ? 'poke_ball_img1' : 'poke_ball';
+   const gen2Class = pokemon.generation === 2 ? 'poke_ball_img2' : 'poke_ball';
+
    return (
       <div className='poke_detail_page'>
-         <h1>Wartortle #008</h1>
-         <div id='poke_detail_type'>Water</div>
-         <img
-            src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/8.svg'
-            alt=''
-            id='detail_img'
-         />
+         <h1>
+            {pokemon.name} #{pokemon.id}
+         </h1>
+         <div id='poke_detail_type'>{pokemon.type}</div>
+         <img src={pokemon.picture} alt={pokemon.name} id='detail_img' />
          <div className='poke_detail_cards'>
             <div className='pokedex_info'>
                <h1>Pokedex Information</h1>
                <div className='poke_gen_balls'>
                   <div className='poke_ball'>
-                     <img src={pokeball} alt='' className='poke_ball_img1' />
+                     <img src={pokeball} alt='gen1' className={gen1Class} />
                      <p>1 Gen</p>
                   </div>
                   <div className='poke_ball'>
-                     <img src={pokeball} alt='' className='poke_ball_img2' />
+                     <img src={pokeball} alt='gen2' className={gen2Class} />
                      <p>2 Gen</p>
                   </div>
                </div>
                <div>
                   <p id='description'>Description</p>
-                  <p>
-                     It is very timid. It will be afraid to move if it is alone.
-                     But it will be active if it is in a group.
-                  </p>
+                  <p>{pokemon.description}</p>
                </div>
             </div>
             <div className='pokemon_info_card'>
@@ -43,10 +47,10 @@ export const DetailCard = () => {
                      <p>Abilities</p>
                   </div>
                   <div className='pokemon_info_right'>
-                     <p>1 Generation</p>
-                     <p>1.0 m</p>
-                     <p>22.5 kg</p>
-                     <p>Torrent</p>
+                     <p>{pokemon.generation} Generation</p>
+                     <p>{pokemon.height.toFixed(1)} m</p>
+                     <p>{pokemon.weight.toFixed(1)} kg</p>
+                     <p>{pokemon.ability}</p>
                   </div>
                </div>
             </div>

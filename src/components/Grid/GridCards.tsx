@@ -3,13 +3,18 @@ import React from 'react';
 import { Card } from '../Card/Card';
 import './gridCard.css';
 import { usePokemons } from '../../hooks/usePokemons';
+import { useContext } from 'react';
+import { PokemonContext } from '../../context/PokemonContext';
 
 interface Gen {
    gen: string;
 }
 
 export const GridCards = ({ gen }: Gen) => {
-   const { pokemons, isLoading } = usePokemons();
+   const { isLoading } = usePokemons();
+   const { pokemonState } = useContext(PokemonContext);
+   const { pokemons } = pokemonState;
+
    let pokeCards;
 
    if (gen === '1') {
@@ -27,6 +32,7 @@ export const GridCards = ({ gen }: Gen) => {
                ability={p.ability}
                capture_rate={p.capture_rate}
                description={p.description}
+               generation={p.generation}
             />
          );
       });
@@ -45,6 +51,7 @@ export const GridCards = ({ gen }: Gen) => {
                ability={p.ability}
                capture_rate={p.capture_rate}
                description={p.description}
+               generation={p.generation}
             />
          );
       });
@@ -63,6 +70,7 @@ export const GridCards = ({ gen }: Gen) => {
                ability={p.ability}
                capture_rate={p.capture_rate}
                description={p.description}
+               generation={p.generation}
             />
          );
       });

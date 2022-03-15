@@ -1,5 +1,19 @@
-import React from 'react';
+import { PokemonState } from '../interfaces/contextInterface';
+import { Pokemon } from '../interfaces/FetchPokemonInterfaces';
 
-export const pokemonReducer = () => {
-   return;
+type PokemonAction =
+   | { type: 'addPokemons'; payload: Pokemon[] }
+   | { type: 'toggleFavorite'; payload: { id: number } };
+
+export const pokemonReducer = (
+   state: PokemonState,
+   action: PokemonAction,
+): PokemonState => {
+   switch (action.type) {
+      case 'addPokemons':
+         return { ...state, pokemons: action.payload };
+
+      default:
+         return state;
+   }
 };

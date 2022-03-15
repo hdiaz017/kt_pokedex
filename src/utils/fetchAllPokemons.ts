@@ -21,20 +21,25 @@ export const fetchAllPokemons = async (): Promise<Pokemon[]> => {
    });
 
    // Await promises and map to create new object with desired info
-   const results = await (
+   const results: Pokemon[] = await (
       await Promise.all(promises)
    ).map((p) => {
       return {
          id: p.id,
-         name: p.name,
+         name: p.name[0].toUpperCase() + p.name.slice(1),
          picture: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${p.id}.svg`,
-         type: p.types[0].type.name,
+         type:
+            p.types[0].type.name[0].toUpperCase() +
+            p.types[0].type.name.slice(1),
          url: p.species.url,
-         ability: p.abilities[0].ability.name,
+         ability:
+            p.abilities[0].ability.name[0].toUpperCase() +
+            p.abilities[0].ability.name.slice(1),
          height: p.height,
          weight: p.weight,
          capture_rate: 0,
          description: '',
+         generation: p.id < 152 ? 1 : 2,
       };
    });
 
