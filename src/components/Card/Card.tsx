@@ -1,7 +1,13 @@
-import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import { useNavigate } from 'react-router-dom';
 import { Pokemon } from '../../interfaces/FetchPokemonInterfaces';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
 
 import './card.css';
+
+library.add(fas);
 
 export const Card = ({
    picture,
@@ -15,8 +21,9 @@ export const Card = ({
    description,
    generation,
 }: Pokemon) => {
+   let navigate = useNavigate();
    return (
-      <div className='pokecard'>
+      <div className='pokecard' onClick={() => navigate(`/pokemon/${id}`)}>
          <div className='poke_svg'>
             <img src={picture} alt={name} />
          </div>
@@ -31,7 +38,7 @@ export const Card = ({
                <p>Generation: {generation}</p>
                <div className='poke_more_info'>
                   <p>Capture Rate: {capture_rate}</p>
-                  <Link to={`/pokemon/${id}`}>MAs..</Link>
+                  <FontAwesomeIcon icon='arrow-right' id='card_arrow' />
                </div>
             </div>
          </div>

@@ -5,6 +5,7 @@ import './gridCard.css';
 import { usePokemons } from '../../hooks/usePokemons';
 import { useContext } from 'react';
 import { PokemonContext } from '../../context/PokemonContext';
+import { Pokemon } from '../../interfaces/FetchPokemonInterfaces';
 
 interface Gen {
    gen: string;
@@ -14,67 +15,34 @@ export const GridCards = ({ gen }: Gen) => {
    const { isLoading } = usePokemons();
    const { pokemonState } = useContext(PokemonContext);
    const { pokemons } = pokemonState;
-
-   let pokeCards;
+   let filterGenPokemons: Pokemon[];
 
    if (gen === '1') {
-      pokeCards = pokemons.slice(0, 151).map((p) => {
-         return (
-            <Card
-               key={p.id}
-               id={p.id}
-               type={p.type}
-               picture={p.picture}
-               name={p.name}
-               weight={p.weight}
-               height={p.height}
-               url={p.url}
-               ability={p.ability}
-               capture_rate={p.capture_rate}
-               description={p.description}
-               generation={p.generation}
-            />
-         );
-      });
+      filterGenPokemons = pokemons.filter((p) => p.generation === 1);
    } else if (gen === '2') {
-      pokeCards = pokemons.slice(151, 251).map((p) => {
-         return (
-            <Card
-               key={p.id}
-               id={p.id}
-               type={p.type}
-               picture={p.picture}
-               name={p.name}
-               weight={p.weight}
-               height={p.height}
-               url={p.url}
-               ability={p.ability}
-               capture_rate={p.capture_rate}
-               description={p.description}
-               generation={p.generation}
-            />
-         );
-      });
+      filterGenPokemons = pokemons.filter((p) => p.generation === 2);
    } else {
-      pokeCards = pokemons.map((p) => {
-         return (
-            <Card
-               key={p.id}
-               id={p.id}
-               type={p.type}
-               picture={p.picture}
-               name={p.name}
-               weight={p.weight}
-               height={p.height}
-               url={p.url}
-               ability={p.ability}
-               capture_rate={p.capture_rate}
-               description={p.description}
-               generation={p.generation}
-            />
-         );
-      });
+      filterGenPokemons = pokemons;
    }
+
+   const pokeCards = filterGenPokemons.slice(0, 151).map((p) => {
+      return (
+         <Card
+            key={p.id}
+            id={p.id}
+            type={p.type}
+            picture={p.picture}
+            name={p.name}
+            weight={p.weight}
+            height={p.height}
+            url={p.url}
+            ability={p.ability}
+            capture_rate={p.capture_rate}
+            description={p.description}
+            generation={p.generation}
+         />
+      );
+   });
 
    // console.log('pokemons', pokemons);
 
