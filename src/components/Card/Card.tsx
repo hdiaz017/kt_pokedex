@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 import { Pokemon } from '../../interfaces/FetchPokemonInterfaces';
 import { fetchDescription } from '../../utils/fetchAllPokemons';
 import './card.css';
@@ -29,6 +30,7 @@ export const Card = ({
             <div className='poke_extra_info'>
                <p>Generation: {id > 151 ? '2' : '1'}</p>
                <p>Capture Rate: {capture_rate}</p>
+               <Link to={`/pokemon/${id}`}>MAs..</Link>
             </div>
          </div>
       </div>
