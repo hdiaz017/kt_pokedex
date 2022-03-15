@@ -29,8 +29,10 @@ export const Card = ({
             <hr />
             <div className='poke_extra_info'>
                <p>Generation: {id > 151 ? '2' : '1'}</p>
-               <p>Capture Rate: {capture_rate}</p>
-               <Link to={`/pokemon/${id}`}>MAs..</Link>
+               <div className='poke_more_info'>
+                  <p>Capture Rate: {capture_rate}</p>
+                  <Link to={`/pokemon/${id}`}>MAs..</Link>
+               </div>
             </div>
          </div>
       </div>

@@ -1,0 +1,128 @@
+.poke_detail_page {
+   display: flex;
+   flex-flow: column;
+   align-items: center;
+   justify-content: center;
+   height: 100%;
+   background-color: #f4f7fa;
+   padding-top: 100px;
+}
+
+#poke_detail_type {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   height: 40px;
+   width: 150px;
+   border-radius: 25px;
+   background-color: blue;
+   color: white;
+   font-size: 1.4em;
+   font-family: 'Inter', sans-serif;
+   margin-top: 40px;
+}
+
+#detail_img {
+   height: 600px;
+   width: 600px;
+   margin: 50px;
+}
+
+#description {
+   font-size: 0.8em;
+   font-weight: bold;
+   margin-bottom: 10px;
+}
+
+.poke_detail_cards {
+   /* border: 1px solid red; */
+   display: flex;
+   justify-content: space-evenly;
+   align-items: center;
+   width: 100vw;
+}
+
+.pokedex_info {
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   height: 350px;
+   width: 35%;
+   background-color: #212531;
+   color: white;
+   border-radius: 10px;
+   padding: 20px 40px 20px 40px;
+}
+.poke_gen_balls {
+   display: flex;
+   /* border: 1px solid blue; */
+   align-items: center;
+   justify-content: space-between;
+   margin: 20px;
+   width: 300px;
+   margin: 30px 40px 50px 40px;
+}
+
+.poke_ball_img1 {
+   height: 80px;
+   width: 80px;
+   margin-bottom: 10px;
+   background-color: blue;
+   border-radius: 50%;
+}
+.poke_ball_img2 {
+   height: 80px;
+   width: 80px;
+   margin-bottom: 10px;
+   /* background-color: red; */
+   border-radius: 50%;
+}
+
+.poke_ball {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.pokemon_info_card {
+   background-color: #212531;
+   border-radius: 10px;
+   color: white;
+   /* border: 1px solid red; */
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   height: 350px;
+   width: 35%;
+   padding: 20px 40px 20px 40px;
+}
+
+.pokemon_info {
+   display: flex;
+   align-items: center;
+   justify-content: space-evenly;
+   /* border: 1px solid red; */
+   width: 300px;
+}
+
+.pokemon_info_left {
+   margin-top: 30px;
+   flex-direction: column;
+   display: flex;
+   font-size: 1.3em;
+   font-weight: bold;
+   line-height: 250%;
+   /* border: 1px solid red; */
+}
+
+.pokemon_info_right {
+   line-height: 250%;
+   margin-top: 30px;
+   flex-direction: column;
+   /* border: 1px solid red; */
+   display: flex;
+   font-size: 1.3em;
+
+   font-weight: bold;
+   color: #808080;
+}
