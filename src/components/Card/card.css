@@ -1,6 +1,7 @@
 img {
    height: 200px;
    transition: transform 500ms ease;
+   width: 200px;
 }
 
 .pokecard {

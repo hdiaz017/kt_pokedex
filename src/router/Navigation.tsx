@@ -7,10 +7,11 @@ export const Navigation = () => {
       <BrowserRouter>
          <Navbar />
          <Routes>
-            <Route path='gen1' element={<h1>Gen 1</h1>} />
-            <Route path='gen2' element={<h1>Gen 2</h1>} />
+            <Route path='gen1' element={<GridCards gen='1' />} />
+            <Route path='gen2' element={<GridCards gen='2' />} />
             <Route path='pokemon/:id' element={<h1>Single Pokemon</h1>} />
-            <Route path='home' element={<GridCards />} />
+            <Route path='home' element={<GridCards gen='all' />} />
+            <Route path='favorites' element={<GridCards gen='all' />} />
             <Route path='/*' element={<Navigate to='/home' replace />} />
          </Routes>
       </BrowserRouter>

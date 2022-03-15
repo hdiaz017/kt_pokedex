@@ -1,8 +1,75 @@
 import React from 'react';
+
 import { Card } from '../Card/Card';
 import './gridCard.css';
+import { usePokemons } from '../../hooks/usePokemons';
 
-export const GridCards = () => {
+interface Gen {
+   gen: string;
+}
+
+export const GridCards = ({ gen }: Gen) => {
+   const { pokemons, isLoading } = usePokemons();
+   let pokeCards;
+
+   if (gen === '1') {
+      pokeCards = pokemons.slice(0, 151).map((p) => {
+         return (
+            <Card
+               key={p.id}
+               id={p.id}
+               type={p.type}
+               picture={p.picture}
+               name={p.name}
+               weight={p.weight}
+               height={p.height}
+               url={p.url}
+               ability={p.ability}
+               capture_rate={p.capture_rate}
+               description={p.description}
+            />
+         );
+      });
+   } else if (gen === '2') {
+      pokeCards = pokemons.slice(151, 251).map((p) => {
+         return (
+            <Card
+               key={p.id}
+               id={p.id}
+               type={p.type}
+               picture={p.picture}
+               name={p.name}
+               weight={p.weight}
+               height={p.height}
+               url={p.url}
+               ability={p.ability}
+               capture_rate={p.capture_rate}
+               description={p.description}
+            />
+         );
+      });
+   } else {
+      pokeCards = pokemons.map((p) => {
+         return (
+            <Card
+               key={p.id}
+               id={p.id}
+               type={p.type}
+               picture={p.picture}
+               name={p.name}
+               weight={p.weight}
+               height={p.height}
+               url={p.url}
+               ability={p.ability}
+               capture_rate={p.capture_rate}
+               description={p.description}
+            />
+         );
+      });
+   }
+
+   // console.log('pokemons', pokemons);
+
    return (
       <div className='grid_poke_cards'>
          <div className='grid_heading_filters'>
@@ -23,9 +90,7 @@ export const GridCards = () => {
                </div>
             </div>
          </div>
-         <div className='poke_cards'>
-            <Card />
-         </div>
+         <div className='poke_cards'>{pokeCards}</div>
       </div>
    );
 };

@@ -1,24 +1,34 @@
+import { FC } from 'react';
+import { Pokemon } from '../../interfaces/FetchPokemonInterfaces';
+import { fetchDescription } from '../../utils/fetchAllPokemons';
 import './card.css';
 
-export const Card = () => {
+export const Card = ({
+   picture,
+   name,
+   id,
+   type,
+   url,
+   height,
+   weight,
+   capture_rate,
+   description,
+}: Pokemon) => {
    return (
       <div className='pokecard'>
          <div className='poke_svg'>
-            <img
-               src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/8.svg'
-               alt='poke'
-            />
+            <img src={picture} alt={name} />
          </div>
          <div className='poke_info'>
             <div className='poke_main_info'>
-               <p id='poke_name'>Wartortle</p>
-               <p id='poke_id'>#8</p>
+               <p id='poke_name'>{name[0].toUpperCase() + name.slice(1)}</p>
+               <p id='poke_id'>#{id}</p>
             </div>
-            <p id='poke_type'>Type: Water</p>
+            <p id='poke_type'>Type: {type[0].toUpperCase() + type.slice(1)}</p>
             <hr />
             <div className='poke_extra_info'>
-               <p>Generation: 1</p>
-               <p>Capture Rate: 5</p>
+               <p>Generation: {id > 151 ? '2' : '1'}</p>
+               <p>Capture Rate: {capture_rate}</p>
             </div>
          </div>
       </div>

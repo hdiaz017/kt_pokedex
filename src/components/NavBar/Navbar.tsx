@@ -43,6 +43,16 @@ export const Navbar = () => {
                      Generation 2
                   </NavLink>
                </li>
+               <li>
+                  <NavLink
+                     to='/favorites'
+                     className={({ isActive }) =>
+                        isActive ? 'nav_active' : ''
+                     }
+                  >
+                     Favorites
+                  </NavLink>
+               </li>
             </ul>
          </div>
       </nav>
