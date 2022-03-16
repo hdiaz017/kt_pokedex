@@ -12,6 +12,7 @@ const Initial_State: PokemonState = {
    pokemons: [],
    favorites: [],
    search: '',
+   isLoading: true,
 };
 
 export const PokemonProvider = ({ children }: props) => {

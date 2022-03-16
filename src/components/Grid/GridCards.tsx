@@ -7,6 +7,7 @@ import { Card } from '../Card/Card';
 import { Pokemon } from '../../interfaces/FetchPokemonInterfaces';
 import { SearchBar } from '../SearchBar/SearchBar';
 import { pokeColors, pokeTypes } from '../../utils/typeColor';
+
 import './gridCard.css';
 
 export const GridCards = () => {
@@ -16,7 +17,7 @@ export const GridCards = () => {
       };
    }, []);
    const { pokemonState, updateSearch } = useContext(PokemonContext);
-   const { pokemons, search } = pokemonState;
+   const { pokemons, search, isLoading } = pokemonState;
    const [count, setCount] = useState(1);
    const { values, handleInputChange } = useForm({
       filterType: 'all',
@@ -100,6 +101,59 @@ export const GridCards = () => {
       );
    });
 
+   if (isLoading) {
+      return (
+         <div className='grid_poke_cards'>
+            <div className='grid_heading_filters'>
+               <h1>ALL POKEMON</h1>
+               <SearchBar />
+               <div className='grid_filters'>
+                  <div className='poke_filter'>
+                     <label htmlFor='color'>Filter by Color</label>
+                     <select
+                        name='filterColor'
+                        id='color'
+                        onChange={handleInputChangeColor}
+                        value={filterColor}
+                     >
+                        <option value='all' key={'all'}>
+                           All
+                        </option>
+                        {pokeColors.map((t) => (
+                           <option value={t.color} key={t.color}>
+                              {t.name}
+                           </option>
+                        ))}
+                     </select>
+                  </div>
+                  <div className='poke_filter'>
+                     <label htmlFor='type'>Filter by Type</label>
+                     <select
+                        name='filterType'
+                        id='type'
+                        onChange={handleInputChange}
+                        value={filterType}
+                     >
+                        <option value='all' key={'all'}>
+                           All
+                        </option>
+                        {pokeTypes.map((t) => (
+                           <option value={t} key={t}>
+                              {t[0].toUpperCase() + t.slice(1)}
+                           </option>
+                        ))}
+                     </select>
+                  </div>
+               </div>
+            </div>
+            <div className='loader'>
+               <h1 id='slogan'>Collecting Pokemons</h1>
+               <div className='spinner'></div>
+            </div>
+         </div>
+      );
+   }
+
    return (
       <div className='grid_poke_cards'>
          <div className='grid_heading_filters'>
@@ -144,6 +198,7 @@ export const GridCards = () => {
                </div>
             </div>
          </div>
+
          <div className='poke_cards'>
             {search.length < 0 ? pokeCards : pokeCardsSearch}
          </div>

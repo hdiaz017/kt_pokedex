@@ -14,7 +14,11 @@ export const pokemonReducer = (
 ): PokemonState => {
    switch (action.type) {
       case 'addPokemons':
-         return { ...state, pokemons: action.payload };
+         return {
+            ...state,
+            pokemons: action.payload,
+            isLoading: !state.isLoading,
+         };
       case 'updateSearch':
          return { ...state, search: action.payload };
       case 'addFavorite':
