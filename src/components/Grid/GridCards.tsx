@@ -6,6 +6,7 @@ import { usePokemons } from '../../hooks/usePokemons';
 import { useContext } from 'react';
 import { PokemonContext } from '../../context/PokemonContext';
 import { Pokemon } from '../../interfaces/FetchPokemonInterfaces';
+import { SearchBar } from '../SearchBar/SearchBar';
 
 interface Gen {
    gen: string;
@@ -44,13 +45,11 @@ export const GridCards = ({ gen }: Gen) => {
       );
    });
 
-   // console.log('pokemons', pokemons);
-
    return (
       <div className='grid_poke_cards'>
          <div className='grid_heading_filters'>
             <h1>ALL POKEMON</h1>
-            <input type='text' placeholder='Search Pokemon...' />
+            <SearchBar />
             <div className='grid_filters'>
                <div className='poke_filter'>
                   <label htmlFor='color'>Filter by Color</label>
