@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Card } from '../Card/Card';
 import '../Grid/gridCard.css';
 
@@ -35,6 +36,7 @@ export const Gen1Page = () => {
             .filter((p) => p.type.toLowerCase() === filterType);
       }
       setCount(count + 1);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [filterType, pokemons]);
 
    let filterSearchPokemons: Pokemon[] = filterGenPokemons.current.filter((p) =>

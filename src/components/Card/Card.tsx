@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
 import { Pokemon } from '../../interfaces/FetchPokemonInterfaces';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faHeart, faL, fas } from '@fortawesome/free-solid-svg-icons';
+import { faHeart, fas } from '@fortawesome/free-solid-svg-icons';
 
 import './card.css';
 
@@ -14,11 +14,9 @@ export const Card = ({
    name,
    id,
    type,
-   url,
-   height,
-   weight,
+
    capture_rate,
-   description,
+
    generation,
 }: Pokemon) => {
    let navigate = useNavigate();

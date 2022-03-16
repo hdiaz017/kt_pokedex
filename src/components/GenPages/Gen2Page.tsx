@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Card } from '../Card/Card';
-import { usePokemons } from '../../hooks/usePokemons';
+
 import { useContext, useEffect, useRef, useState } from 'react';
 import { PokemonContext } from '../../context/PokemonContext';
 import { Pokemon } from '../../interfaces/FetchPokemonInterfaces';

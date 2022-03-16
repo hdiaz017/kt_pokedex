@@ -1,5 +1,4 @@
-import React from 'react';
-
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Card } from '../Card/Card';
 import './gridCard.css';
 
