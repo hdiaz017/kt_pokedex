@@ -1,10 +1,12 @@
 import { Card } from '../Card/Card';
 import { usePokemons } from '../../hooks/usePokemons';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { PokemonContext } from '../../context/PokemonContext';
 import { Pokemon } from '../../interfaces/FetchPokemonInterfaces';
 import '../Grid/gridCard.css';
 import { SearchBar } from '../SearchBar/SearchBar';
+import { useForm } from '../../hooks/useForm';
+import { pokeTypes } from '../../utils/typeColor';
 
 export const Gen2Page = () => {
    useEffect(() => {
@@ -15,14 +17,33 @@ export const Gen2Page = () => {
 
    const { pokemonState, updateSearch } = useContext(PokemonContext);
    const { pokemons, search } = pokemonState;
-   let filterGenPokemons: Pokemon[] = pokemons.filter(
-      (p) => p.generation === 2,
+   const [count, setCount] = useState(1);
+   const { values, handleInputChange } = useForm({
+      filterType: 'all',
+   });
+   const { filterType } = values;
+
+   let filterGenPokemons = useRef<Pokemon[]>(
+      pokemons.filter((p) => p.generation === 2),
    );
-   let filterSearchPokemons: Pokemon[] = filterGenPokemons.filter((p) =>
+   useEffect(() => {
+      if (filterType === 'all') {
+         filterGenPokemons.current = pokemons.filter((p) => p.generation === 2);
+      } else {
+         console.log(filterType);
+         filterGenPokemons.current = pokemons
+            .filter((p) => p.generation === 2)
+            .filter((p) => p.type.toLowerCase() === filterType);
+      }
+      setCount(count + 1);
+   }, [filterType, pokemons]);
+   console.log(filterGenPokemons);
+
+   let filterSearchPokemons: Pokemon[] = filterGenPokemons.current.filter((p) =>
       p.name.toLowerCase().includes(search.toLowerCase()),
    );
 
-   const pokeCardsGen = filterGenPokemons.map((p) => {
+   const pokeCardsGen = filterGenPokemons.current.map((p) => {
       return (
          <Card
             key={p.id}
@@ -75,8 +96,20 @@ export const Gen2Page = () => {
                </div>
                <div className='poke_filter'>
                   <label htmlFor='type'>Filter by Type</label>
-                  <select name='filter2' id='type'>
-                     Filter by Type
+                  <select
+                     name='filterType'
+                     id='type'
+                     onChange={handleInputChange}
+                     value={filterType}
+                  >
+                     <option value='all' key={'all'}>
+                        All
+                     </option>
+                     {pokeTypes.map((t) => (
+                        <option value={t} key={t}>
+                           {t[0].toUpperCase() + t.slice(1)}
+                        </option>
+                     ))}
                   </select>
                </div>
             </div>

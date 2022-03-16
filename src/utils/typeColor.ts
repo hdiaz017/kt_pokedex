@@ -16,3 +16,22 @@ export const typeColor: any = {
    rock: '#2d3436',
    water: '#0190FF',
 };
+
+export const pokeTypes = [
+   'bug',
+   'dragon',
+   'electric',
+   'fairy',
+   'fighting',
+   'fire',
+   'flying',
+   'grass',
+   'ground',
+   'ghost',
+   'ice',
+   'normal',
+   'poison',
+   'psychic',
+   'rock',
+   'water',
+];

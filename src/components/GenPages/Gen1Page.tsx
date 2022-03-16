@@ -1,29 +1,47 @@
-import React from 'react';
-
 import { Card } from '../Card/Card';
 import '../Grid/gridCard.css';
 
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { PokemonContext } from '../../context/PokemonContext';
 import { Pokemon } from '../../interfaces/FetchPokemonInterfaces';
 import { SearchBar } from '../SearchBar/SearchBar';
+import { pokeTypes } from '../../utils/typeColor';
+import { useForm } from '../../hooks/useForm';
 
 export const Gen1Page = () => {
    const { pokemonState, updateSearch } = useContext(PokemonContext);
    const { pokemons, search } = pokemonState;
+   const [count, setCount] = useState(1);
+   const { values, handleInputChange } = useForm({
+      filterType: 'all',
+   });
+   const { filterType } = values;
    useEffect(() => {
       return () => {
          updateSearch('');
       };
    }, []);
-   let filterGenPokemons: Pokemon[] = pokemons.filter(
-      (p) => p.generation === 1,
+
+   let filterGenPokemons = useRef<Pokemon[]>(
+      pokemons.filter((p) => p.generation === 1),
    );
-   let filterSearchPokemons: Pokemon[] = filterGenPokemons.filter((p) =>
+   useEffect(() => {
+      if (filterType === 'all') {
+         filterGenPokemons.current = pokemons.filter((p) => p.generation === 1);
+      } else {
+         console.log(filterType);
+         filterGenPokemons.current = pokemons
+            .filter((p) => p.generation === 1)
+            .filter((p) => p.type.toLowerCase() === filterType);
+      }
+      setCount(count + 1);
+   }, [filterType, pokemons]);
+
+   let filterSearchPokemons: Pokemon[] = filterGenPokemons.current.filter((p) =>
       p.name.toLowerCase().includes(search.toLowerCase()),
    );
 
-   const pokeCardsGen = filterGenPokemons.map((p) => {
+   const pokeCardsGen = filterGenPokemons.current.map((p) => {
       return (
          <Card
             key={p.id}
@@ -62,6 +80,8 @@ export const Gen1Page = () => {
       );
    });
 
+   console.log(pokeCardsGen);
+
    return (
       <div className='grid_poke_cards'>
          <div className='grid_heading_filters'>
@@ -70,14 +90,24 @@ export const Gen1Page = () => {
             <div className='grid_filters'>
                <div className='poke_filter'>
                   <label htmlFor='color'>Filter by Color</label>
-                  <select name='filter1' id='color'>
-                     Filter by Color
-                  </select>
+                  <select name='filter1' id='color'></select>
                </div>
                <div className='poke_filter'>
                   <label htmlFor='type'>Filter by Type</label>
-                  <select name='filter2' id='type'>
-                     Filter by Type
+                  <select
+                     name='filterType'
+                     id='type'
+                     onChange={handleInputChange}
+                     value={filterType}
+                  >
+                     <option value='all' key={'all'}>
+                        All
+                     </option>
+                     {pokeTypes.map((t) => (
+                        <option value={t} key={t}>
+                           {t[0].toUpperCase() + t.slice(1)}
+                        </option>
+                     ))}
                   </select>
                </div>
             </div>
