@@ -1,0 +1,10 @@
+#searchbar {
+   border-radius: 5px;
+   border: 1px solid grey;
+   height: 30px;
+   width: 100%;
+}
+
+form {
+   width: 30%;
+}

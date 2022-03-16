@@ -2,6 +2,7 @@ import React, { ChangeEvent } from 'react';
 import { useForm } from '../../hooks/useForm';
 import { useContext } from 'react';
 import { PokemonContext } from '../../context/PokemonContext';
+import './SearchBar.css';
 
 interface FormProp {
    pokemon: string;
@@ -25,6 +26,7 @@ export const SearchBar = () => {
             value={pokemon}
             name='pokemon'
             onChange={handleInputChange}
+            id='searchbar'
          />
       </form>
    );

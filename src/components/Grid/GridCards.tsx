@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Card } from '../Card/Card';
-import './gridCard.css';
-
 import { useContext, useEffect, useRef, useState } from 'react';
+
 import { PokemonContext } from '../../context/PokemonContext';
+import { useForm } from '../../hooks/useForm';
+import { Card } from '../Card/Card';
 import { Pokemon } from '../../interfaces/FetchPokemonInterfaces';
 import { SearchBar } from '../SearchBar/SearchBar';
-import { useForm } from '../../hooks/useForm';
-import { pokeTypes } from '../../utils/typeColor';
+import { pokeColors, pokeTypes } from '../../utils/typeColor';
+import './gridCard.css';
 
 export const GridCards = () => {
    useEffect(() => {
@@ -21,7 +21,12 @@ export const GridCards = () => {
    const { values, handleInputChange } = useForm({
       filterType: 'all',
    });
+   const { values: valueColor, handleInputChange: handleInputChangeColor } =
+      useForm({
+         filterColor: 'all',
+      });
    const { filterType } = values;
+   const { filterColor } = valueColor;
 
    let filterGenPokemons = useRef<Pokemon[]>(pokemons);
 
@@ -36,6 +41,21 @@ export const GridCards = () => {
       }
       setCount(count + 1);
    }, [filterType, pokemons]);
+
+   useEffect(() => {
+      if (filterColor === 'all') {
+         filterGenPokemons.current = pokemons;
+      } else {
+         console.log(filterColor);
+
+         filterGenPokemons.current = pokemons.filter(
+            (p) => p.color === filterColor,
+         );
+      }
+      setCount(count + 1);
+
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [filterColor, pokemons]);
 
    let filterSearchPokemons: Pokemon[] = filterGenPokemons.current.filter((p) =>
       p.name.toLowerCase().includes(search.toLowerCase()),
@@ -90,8 +110,20 @@ export const GridCards = () => {
             <div className='grid_filters'>
                <div className='poke_filter'>
                   <label htmlFor='color'>Filter by Color</label>
-                  <select name='filter1' id='color'>
-                     Filter by Color
+                  <select
+                     name='filterColor'
+                     id='color'
+                     onChange={handleInputChangeColor}
+                     value={filterColor}
+                  >
+                     <option value='all' key={'all'}>
+                        All
+                     </option>
+                     {pokeColors.map((t) => (
+                        <option value={t.color} key={t.color}>
+                           {t.name}
+                        </option>
+                     ))}
                   </select>
                </div>
                <div className='poke_filter'>

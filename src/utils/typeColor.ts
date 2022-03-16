@@ -35,3 +35,22 @@ export const pokeTypes = [
    'rock',
    'water',
 ];
+
+export const pokeColors = [
+   { color: '#26de81', name: 'Green' },
+   { color: '#ffeaa7', name: 'Cream' },
+   { color: '#fed330', name: 'Yellow' },
+   { color: '#FF0069', name: 'Pink' },
+   { color: '#30336b', name: 'Lila' },
+   { color: '#f0932b', name: 'Orange' },
+   { color: '#81ecec', name: 'Cyan' },
+   { color: '#00b894', name: 'Mint' },
+   { color: '#EFB549', name: 'Light Orange' },
+   { color: '#a55eea', name: 'Purple' },
+   { color: '#74b9ff', name: 'Light Blue' },
+   { color: '#95afc0', name: 'Light Grey' },
+   { color: '#6c5ce7', name: 'Light Purple' },
+   { color: '#a29bfe', name: 'Light Lila' },
+   { color: '#2d3436', name: 'Grey' },
+   { color: '#0190FF', name: 'Blue' },
+];

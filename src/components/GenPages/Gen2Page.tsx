@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Card } from '../Card/Card';
-
 import { useContext, useEffect, useRef, useState } from 'react';
+
 import { PokemonContext } from '../../context/PokemonContext';
-import { Pokemon } from '../../interfaces/FetchPokemonInterfaces';
-import '../Grid/gridCard.css';
-import { SearchBar } from '../SearchBar/SearchBar';
 import { useForm } from '../../hooks/useForm';
-import { pokeTypes } from '../../utils/typeColor';
+import { Card } from '../Card/Card';
+import { Pokemon } from '../../interfaces/FetchPokemonInterfaces';
+import { SearchBar } from '../SearchBar/SearchBar';
+import { pokeColors, pokeTypes } from '../../utils/typeColor';
+import '../Grid/gridCard.css';
 
 export const Gen2Page = () => {
    useEffect(() => {
@@ -22,7 +22,12 @@ export const Gen2Page = () => {
    const { values, handleInputChange } = useForm({
       filterType: 'all',
    });
+   const { values: valueColor, handleInputChange: handleInputChangeColor } =
+      useForm({
+         filterColor: 'all',
+      });
    const { filterType } = values;
+   const { filterColor } = valueColor;
 
    let filterGenPokemons = useRef<Pokemon[]>(
       pokemons.filter((p) => p.generation === 2),
@@ -38,7 +43,21 @@ export const Gen2Page = () => {
       }
       setCount(count + 1);
    }, [filterType, pokemons]);
-   console.log(filterGenPokemons);
+
+   useEffect(() => {
+      if (filterColor === 'all') {
+         filterGenPokemons.current = pokemons.filter((p) => p.generation === 2);
+      } else {
+         console.log(filterColor);
+
+         filterGenPokemons.current = pokemons
+            .filter((p) => p.generation === 2)
+            .filter((p) => p.color === filterColor);
+      }
+      setCount(count + 1);
+
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [filterColor, pokemons]);
 
    let filterSearchPokemons: Pokemon[] = filterGenPokemons.current.filter((p) =>
       p.name.toLowerCase().includes(search.toLowerCase()),
@@ -91,8 +110,20 @@ export const Gen2Page = () => {
             <div className='grid_filters'>
                <div className='poke_filter'>
                   <label htmlFor='color'>Filter by Color</label>
-                  <select name='filter1' id='color'>
-                     Filter by Color
+                  <select
+                     name='filterColor'
+                     id='color'
+                     onChange={handleInputChangeColor}
+                     value={filterColor}
+                  >
+                     <option value='all' key={'all'}>
+                        All
+                     </option>
+                     {pokeColors.map((t) => (
+                        <option value={t.color} key={t.color}>
+                           {t.name}
+                        </option>
+                     ))}
                   </select>
                </div>
                <div className='poke_filter'>

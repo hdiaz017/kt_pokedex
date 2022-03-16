@@ -1,18 +1,18 @@
 .grid_poke_cards {
    background-color: #f4f7fa;
-   height: 100%;
    display: flex;
    flex-direction: column;
    font-family: 'Inter', sans-serif;
+   height: 100%;
    padding-left: 40px;
    padding-right: 40px;
 }
 
 .grid_heading_filters {
-   margin: 100px 0px 50px 0px;
-   display: flex;
    align-items: center;
+   display: flex;
    justify-content: space-between;
+   margin: 100px 0px 50px 0px;
 }
 
 .grid_filters {
@@ -22,16 +22,15 @@
 .poke_filter {
    display: flex;
    flex-direction: column;
+   margin-left: 50px;
 }
 
 .poke_cards {
    display: flex;
    flex-flow: wrap;
-
    justify-content: space-between;
 }
 
-input {
-   width: 30%;
-   height: 30px;
+select {
+   margin-top: 10px;
 }

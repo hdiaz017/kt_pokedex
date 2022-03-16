@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Card } from '../Card/Card';
-import '../Grid/gridCard.css';
-
 import { useContext, useEffect, useRef, useState } from 'react';
+
 import { PokemonContext } from '../../context/PokemonContext';
+import { useForm } from '../../hooks/useForm';
+import { Card } from '../Card/Card';
 import { Pokemon } from '../../interfaces/FetchPokemonInterfaces';
 import { SearchBar } from '../SearchBar/SearchBar';
-import { pokeTypes } from '../../utils/typeColor';
-import { useForm } from '../../hooks/useForm';
+import { pokeColors, pokeTypes } from '../../utils/typeColor';
+import '../Grid/gridCard.css';
 
 export const Gen1Page = () => {
    const { pokemonState, updateSearch } = useContext(PokemonContext);
@@ -16,7 +16,12 @@ export const Gen1Page = () => {
    const { values, handleInputChange } = useForm({
       filterType: 'all',
    });
+   const { values: valueColor, handleInputChange: handleInputChangeColor } =
+      useForm({
+         filterColor: 'all',
+      });
    const { filterType } = values;
+   const { filterColor } = valueColor;
    useEffect(() => {
       return () => {
          updateSearch('');
@@ -38,6 +43,20 @@ export const Gen1Page = () => {
       setCount(count + 1);
       // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [filterType, pokemons]);
+
+   useEffect(() => {
+      if (filterColor === 'all') {
+         filterGenPokemons.current = pokemons.filter((p) => p.generation === 1);
+      } else {
+         console.log(filterColor);
+
+         filterGenPokemons.current = pokemons
+            .filter((p) => p.generation === 1)
+            .filter((p) => p.color === filterColor);
+      }
+      setCount(count + 1);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [filterColor, pokemons]);
 
    let filterSearchPokemons: Pokemon[] = filterGenPokemons.current.filter((p) =>
       p.name.toLowerCase().includes(search.toLowerCase()),
@@ -82,7 +101,7 @@ export const Gen1Page = () => {
       );
    });
 
-   console.log(pokeCardsGen);
+   // console.log(pokeCardsGen);
 
    return (
       <div className='grid_poke_cards'>
@@ -92,7 +111,21 @@ export const Gen1Page = () => {
             <div className='grid_filters'>
                <div className='poke_filter'>
                   <label htmlFor='color'>Filter by Color</label>
-                  <select name='filter1' id='color'></select>
+                  <select
+                     name='filterColor'
+                     id='color'
+                     onChange={handleInputChangeColor}
+                     value={filterColor}
+                  >
+                     <option value='all' key={'all'}>
+                        All
+                     </option>
+                     {pokeColors.map((t) => (
+                        <option value={t.color} key={t.color}>
+                           {t.name}
+                        </option>
+                     ))}
+                  </select>
                </div>
                <div className='poke_filter'>
                   <label htmlFor='type'>Filter by Type</label>
