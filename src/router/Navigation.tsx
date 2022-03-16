@@ -17,7 +17,7 @@ export const Navigation = () => {
                <Route path='gen1' element={<Gen1Page />} />
                <Route path='gen2' element={<Gen2Page />} />
                <Route path='pokemon/:id' element={<DetailCard />} />
-               <Route path='home' element={<GridCards gen='all' />} />
+               <Route path='home' element={<GridCards />} />
                <Route path='favorites' element={<h1>FAvorites</h1>} />
                <Route path='/*' element={<Navigate to='/home' replace />} />
             </Routes>

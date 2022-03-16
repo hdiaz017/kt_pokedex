@@ -5,7 +5,7 @@ import pokeball from '../../img/pokeball.svg';
 import './navbar.css';
 
 export const Navbar = () => {
-   const { isLoading } = usePokemons();
+   usePokemons();
    return (
       <nav>
          <div className='pokeball_navbar'>

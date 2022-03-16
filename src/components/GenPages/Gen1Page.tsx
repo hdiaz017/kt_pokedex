@@ -2,15 +2,20 @@ import React from 'react';
 
 import { Card } from '../Card/Card';
 import '../Grid/gridCard.css';
-import { usePokemons } from '../../hooks/usePokemons';
-import { useContext } from 'react';
+
+import { useContext, useEffect } from 'react';
 import { PokemonContext } from '../../context/PokemonContext';
 import { Pokemon } from '../../interfaces/FetchPokemonInterfaces';
 import { SearchBar } from '../SearchBar/SearchBar';
 
 export const Gen1Page = () => {
-   const { pokemonState } = useContext(PokemonContext);
+   const { pokemonState, updateSearch } = useContext(PokemonContext);
    const { pokemons, search } = pokemonState;
+   useEffect(() => {
+      return () => {
+         updateSearch('');
+      };
+   }, []);
    let filterGenPokemons: Pokemon[] = pokemons.filter(
       (p) => p.generation === 1,
    );
@@ -76,7 +81,7 @@ export const Gen1Page = () => {
             </div>
          </div>
          <div className='poke_cards'>
-            {search === '' ? pokeCardsGen : pokeCardsSearch}
+            {search.length < 0 ? pokeCardsGen : pokeCardsSearch}
          </div>
       </div>
    );
