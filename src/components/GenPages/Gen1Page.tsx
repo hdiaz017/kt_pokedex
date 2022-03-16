@@ -1,40 +1,42 @@
 import React from 'react';
 
 import { Card } from '../Card/Card';
-import './gridCard.css';
+import '../Grid/gridCard.css';
 import { usePokemons } from '../../hooks/usePokemons';
 import { useContext } from 'react';
 import { PokemonContext } from '../../context/PokemonContext';
 import { Pokemon } from '../../interfaces/FetchPokemonInterfaces';
 import { SearchBar } from '../SearchBar/SearchBar';
 
-interface Gen {
-   gen: string;
-}
-
-export const GridCards = ({ gen }: Gen) => {
+export const Gen1Page = () => {
    const { pokemonState } = useContext(PokemonContext);
    const { pokemons, search } = pokemonState;
-   let filterGenPokemons: Pokemon[];
-   console.log(search);
+   let filterGenPokemons: Pokemon[] = pokemons.filter(
+      (p) => p.generation === 1,
+   );
+   let filterSearchPokemons: Pokemon[] = filterGenPokemons.filter((p) =>
+      p.name.toLowerCase().includes(search.toLowerCase()),
+   );
 
-   if (gen === '1') {
-      filterGenPokemons = pokemons.filter((p) => p.generation === 1);
-   } else if (gen === '2') {
-      filterGenPokemons = pokemons.filter((p) => p.generation === 2);
-   } else {
-      filterGenPokemons = pokemons;
-   }
-
-   if (search !== '') {
-      filterGenPokemons = filterGenPokemons.filter((p) =>
-         p.name.toLowerCase().includes(search.toLowerCase()),
+   const pokeCardsGen = filterGenPokemons.map((p) => {
+      return (
+         <Card
+            key={p.id}
+            id={p.id}
+            type={p.type}
+            picture={p.picture}
+            name={p.name}
+            weight={p.weight}
+            height={p.height}
+            url={p.url}
+            ability={p.ability}
+            capture_rate={p.capture_rate}
+            description={p.description}
+            generation={p.generation}
+         />
       );
-   } else {
-      filterGenPokemons = pokemons;
-   }
-
-   const pokeCards = filterGenPokemons.map((p) => {
+   });
+   const pokeCardsSearch = filterSearchPokemons.map((p) => {
       return (
          <Card
             key={p.id}
@@ -73,7 +75,9 @@ export const GridCards = ({ gen }: Gen) => {
                </div>
             </div>
          </div>
-         <div className='poke_cards'>{pokeCards}</div>
+         <div className='poke_cards'>
+            {search === '' ? pokeCardsGen : pokeCardsSearch}
+         </div>
       </div>
    );
 };

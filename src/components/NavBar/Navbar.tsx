@@ -1,9 +1,11 @@
 import { NavLink } from 'react-router-dom';
+import { usePokemons } from '../../hooks/usePokemons';
 import pokeball from '../../img/pokeball.svg';
 
 import './navbar.css';
 
 export const Navbar = () => {
+   const { isLoading } = usePokemons();
    return (
       <nav>
          <div className='pokeball_navbar'>

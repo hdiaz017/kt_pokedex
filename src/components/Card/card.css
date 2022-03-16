@@ -22,6 +22,14 @@ img {
    height: 20px;
    color: #6c7a9e;
 }
+#card_heart {
+   height: 20px;
+   color: #6c7a9e;
+}
+#card_heart_fav {
+   height: 20px;
+   color: red;
+}
 
 .pokecard:hover {
    transform: scale(1.05);

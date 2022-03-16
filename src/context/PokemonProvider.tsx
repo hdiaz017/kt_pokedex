@@ -11,6 +11,7 @@ interface props {
 const Initial_State: PokemonState = {
    pokemons: [],
    favorites: [],
+   search: '',
 };
 
 export const PokemonProvider = ({ children }: props) => {
@@ -18,12 +19,16 @@ export const PokemonProvider = ({ children }: props) => {
    const addPokemons = (pokemons: Pokemon[]) => {
       dispatch({ type: 'addPokemons', payload: pokemons });
    };
+   const updateSearch = (search: string) => {
+      dispatch({ type: 'updateSearch', payload: search });
+   };
 
    return (
       <PokemonContext.Provider
          value={{
             pokemonState,
             addPokemons,
+            updateSearch,
          }}
       >
          {children}

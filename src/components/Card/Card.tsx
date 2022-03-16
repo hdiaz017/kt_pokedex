@@ -3,11 +3,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
 import { Pokemon } from '../../interfaces/FetchPokemonInterfaces';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { fas } from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faL, fas } from '@fortawesome/free-solid-svg-icons';
 
 import './card.css';
 
-library.add(fas);
+library.add(faHeart, fas);
 
 export const Card = ({
    picture,
@@ -32,7 +32,11 @@ export const Card = ({
                <p id='poke_name'>{name}</p>
                <p id='poke_id'>#{id}</p>
             </div>
-            <p id='poke_type'>Type: {type}</p>
+            <div className='poke_main_info'>
+               <p id='poke_type'>Type: {type}</p>
+               <FontAwesomeIcon icon={faHeart} id='card_heart' />
+            </div>
+
             <hr />
             <div className='poke_extra_info'>
                <p>Generation: {generation}</p>
