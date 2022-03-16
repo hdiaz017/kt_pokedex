@@ -1,12 +1,18 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { PokemonContext } from '../../context/PokemonContext';
 import pokeball from '../../img/pokeball_line.png';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faHeart, fas } from '@fortawesome/free-solid-svg-icons';
 import './detailCard.css';
 
+library.add(faHeart, fas);
+
 export const DetailCard = () => {
-   const { pokemonState } = useContext(PokemonContext);
-   const { pokemons } = pokemonState;
+   const { pokemonState, addFavorite, removeFavorite } =
+      useContext(PokemonContext);
+   const { pokemons, favorites } = pokemonState;
    const { id } = useParams();
    useEffect(() => {
       window.scrollTo(0, 0);
@@ -14,12 +20,33 @@ export const DetailCard = () => {
    const [pokemon] = pokemons.filter((p) => p.id.toString() === id);
    const gen1Class = pokemon.generation === 1 ? 'poke_ball_img1' : 'poke_ball';
    const gen2Class = pokemon.generation === 2 ? 'poke_ball_img2' : 'poke_ball';
+   const isFavorite = favorites.filter((f) => f.id.toString() === id);
+   const addFav = () => {
+      addFavorite(pokemon);
+   };
+   const removeFav = () => {
+      removeFavorite(pokemon);
+   };
 
    return (
       <div className='poke_detail_page'>
-         <h1>
-            {pokemon.name} #{pokemon.id}
-         </h1>
+         <div className='poke_detail_title'>
+            <p>{pokemon.name}</p>
+            <p>#{pokemon.id} </p>
+            {isFavorite.length > 0 ? (
+               <FontAwesomeIcon
+                  icon={faHeart}
+                  id='card_heart_detail_fav'
+                  onClick={removeFav}
+               />
+            ) : (
+               <FontAwesomeIcon
+                  icon={faHeart}
+                  id='card_heart_detail'
+                  onClick={addFav}
+               />
+            )}
+         </div>
          <div id='poke_detail_type' style={{ backgroundColor: pokemon.color }}>
             {pokemon.type}
          </div>

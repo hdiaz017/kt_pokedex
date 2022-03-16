@@ -31,7 +31,12 @@ export const Card = (pokemon: Pokemon) => {
    return (
       <div className='pokecard'>
          <div className='poke_svg'>
-            <img src={picture} alt={name} />
+            <img
+               src={picture}
+               alt={name}
+               onClick={() => navigate(`/pokemon/${id}`)}
+               id='poke_card_img'
+            />
          </div>
          <div className='poke_info'>
             <div className='poke_main_info'>

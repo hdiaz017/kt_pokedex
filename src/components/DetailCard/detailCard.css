@@ -7,6 +7,37 @@
    justify-content: center;
    padding-top: 100px;
 }
+.poke_detail_title {
+   display: flex;
+   align-items: center;
+   justify-content: space-evenly;
+
+   width: 25%;
+   font-size: 2.5em;
+   font-weight: bold;
+}
+
+#card_heart_detail {
+   color: #6c7a9e;
+   height: 50px;
+   cursor: pointer;
+   margin-top: 10px;
+}
+
+#card_heart_detail:hover {
+   color: #96a0bf;
+   transform: scale(1.15);
+}
+#card_heart_detail_fav:hover {
+   color: red;
+   transform: scale(1.15);
+}
+#card_heart_detail_fav {
+   color: red;
+   height: 50px;
+   cursor: pointer;
+   margin-top: 10px;
+}
 
 #poke_detail_type {
    align-items: center;
