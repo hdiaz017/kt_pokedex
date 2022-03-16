@@ -1,6 +1,5 @@
-import React, { ChangeEvent } from 'react';
 import { useForm } from '../../hooks/useForm';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { PokemonContext } from '../../context/PokemonContext';
 import './SearchBar.css';
 
@@ -10,16 +9,18 @@ interface FormProp {
 
 export const SearchBar = () => {
    const { updateSearch } = useContext(PokemonContext);
+
    const { values, handleInputChange } = useForm<FormProp>({
       pokemon: '',
    });
    const { pokemon } = values;
-   const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
-      e.preventDefault();
+   useEffect(() => {
       updateSearch(pokemon);
-   };
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [pokemon]);
+
    return (
-      <form onSubmit={handleSubmit}>
+      <form>
          <input
             type='text'
             placeholder='Search Pokemon...'
@@ -27,6 +28,7 @@ export const SearchBar = () => {
             name='pokemon'
             onChange={handleInputChange}
             id='searchbar'
+            autoComplete='off'
          />
       </form>
    );

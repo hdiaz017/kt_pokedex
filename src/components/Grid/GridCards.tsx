@@ -100,8 +100,6 @@ export const GridCards = () => {
       );
    });
 
-   console.log(pokeCards);
-
    return (
       <div className='grid_poke_cards'>
          <div className='grid_heading_filters'>

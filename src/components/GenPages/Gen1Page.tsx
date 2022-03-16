@@ -101,8 +101,6 @@ export const Gen1Page = () => {
       );
    });
 
-   // console.log(pokeCardsGen);
-
    return (
       <div className='grid_poke_cards'>
          <div className='grid_heading_filters'>
