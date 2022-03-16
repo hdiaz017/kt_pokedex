@@ -1,5 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { DetailCard } from '../components/DetailCard/DetailCard';
+import { FavoritesPage } from '../components/Favorites/FavoritesPage';
 import { Gen1Page } from '../components/GenPages/Gen1Page';
 import { Gen2Page } from '../components/GenPages/Gen2Page';
 
@@ -18,7 +19,7 @@ export const Navigation = () => {
                <Route path='gen2' element={<Gen2Page />} />
                <Route path='pokemon/:id' element={<DetailCard />} />
                <Route path='home' element={<GridCards />} />
-               <Route path='favorites' element={<h1>FAvorites</h1>} />
+               <Route path='favorites' element={<FavoritesPage />} />
                <Route path='/*' element={<Navigate to='/home' replace />} />
             </Routes>
          </PokemonProvider>

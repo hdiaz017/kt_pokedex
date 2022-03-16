@@ -9,9 +9,9 @@ import { SearchBar } from '../SearchBar/SearchBar';
 import { pokeColors, pokeTypes } from '../../utils/typeColor';
 import '../Grid/gridCard.css';
 
-export const Gen1Page = () => {
+export const FavoritesPage = () => {
    const { pokemonState, updateSearch } = useContext(PokemonContext);
-   const { pokemons, search } = pokemonState;
+   const { pokemons, favorites, search } = pokemonState;
    const [count, setCount] = useState(1);
    const { values, handleInputChange } = useForm({
       filterType: 'all',
@@ -28,35 +28,35 @@ export const Gen1Page = () => {
       };
    }, []);
 
-   let filterGenPokemons = useRef<Pokemon[]>(
-      pokemons.filter((p) => p.generation === 1),
-   );
+   let filterGenPokemons = useRef<Pokemon[]>(favorites);
+   console.log(filterGenPokemons);
+
    useEffect(() => {
       if (filterType === 'all') {
-         filterGenPokemons.current = pokemons.filter((p) => p.generation === 1);
+         filterGenPokemons.current = favorites;
       } else {
          console.log(filterType);
-         filterGenPokemons.current = pokemons
-            .filter((p) => p.generation === 1)
-            .filter((p) => p.type.toLowerCase() === filterType);
+         filterGenPokemons.current = favorites.filter(
+            (p) => p.type.toLowerCase() === filterType,
+         );
       }
       setCount(count + 1);
       // eslint-disable-next-line react-hooks/exhaustive-deps
-   }, [filterType, pokemons]);
+   }, [filterType, pokemons, favorites]);
 
    useEffect(() => {
       if (filterColor === 'all') {
-         filterGenPokemons.current = pokemons.filter((p) => p.generation === 1);
+         filterGenPokemons.current = favorites;
       } else {
          console.log(filterColor);
 
-         filterGenPokemons.current = pokemons
-            .filter((p) => p.generation === 1)
-            .filter((p) => p.color === filterColor);
+         filterGenPokemons.current = favorites.filter(
+            (p) => p.color === filterColor,
+         );
       }
       setCount(count + 1);
       // eslint-disable-next-line react-hooks/exhaustive-deps
-   }, [filterColor, pokemons]);
+   }, [filterColor, pokemons, favorites]);
 
    let filterSearchPokemons: Pokemon[] = filterGenPokemons.current.filter((p) =>
       p.name.toLowerCase().includes(search.toLowerCase()),
@@ -104,7 +104,7 @@ export const Gen1Page = () => {
    return (
       <div className='grid_poke_cards'>
          <div className='grid_heading_filters'>
-            <h1>GENERATION 1</h1>
+            <h1>FAVORITE POKEMONS</h1>
             <SearchBar />
             <div className='grid_filters'>
                <div className='poke_filter'>

@@ -105,7 +105,7 @@ export const Gen2Page = () => {
    return (
       <div className='grid_poke_cards'>
          <div className='grid_heading_filters'>
-            <h1>ALL POKEMON</h1>
+            <h1>GENERATION 2</h1>
             <SearchBar />
             <div className='grid_filters'>
                <div className='poke_filter'>

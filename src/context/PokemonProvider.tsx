@@ -22,6 +22,12 @@ export const PokemonProvider = ({ children }: props) => {
    const updateSearch = (search: string) => {
       dispatch({ type: 'updateSearch', payload: search });
    };
+   const addFavorite = (pokemon: Pokemon) => {
+      dispatch({ type: 'addFavorite', payload: pokemon });
+   };
+   const removeFavorite = (pokemon: Pokemon) => {
+      dispatch({ type: 'removeFavorite', payload: pokemon });
+   };
 
    return (
       <PokemonContext.Provider
@@ -29,6 +35,8 @@ export const PokemonProvider = ({ children }: props) => {
             pokemonState,
             addPokemons,
             updateSearch,
+            addFavorite,
+            removeFavorite,
          }}
       >
          {children}

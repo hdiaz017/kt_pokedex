@@ -21,19 +21,30 @@ img {
 #card_arrow {
    color: #6c7a9e;
    height: 20px;
+   cursor: pointer;
 }
 #card_heart {
    color: #6c7a9e;
    height: 20px;
+   cursor: pointer;
+}
+
+#card_arrow:hover {
+   color: #96a0bf;
+   transform: scale(1.15);
+}
+#card_heart:hover {
+   color: #96a0bf;
+   transform: scale(1.15);
 }
 #card_heart_fav {
    color: red;
    height: 20px;
+   cursor: pointer;
 }
 
 .pokecard:hover {
    background-color: #313543;
-   cursor: pointer;
    transform: scale(1.05);
 }
 

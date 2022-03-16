@@ -4,7 +4,9 @@ import { Pokemon } from '../interfaces/FetchPokemonInterfaces';
 type PokemonAction =
    | { type: 'addPokemons'; payload: Pokemon[] }
    | { type: 'toggleFavorite'; payload: { id: number } }
-   | { type: 'updateSearch'; payload: string };
+   | { type: 'updateSearch'; payload: string }
+   | { type: 'addFavorite'; payload: Pokemon }
+   | { type: 'removeFavorite'; payload: Pokemon };
 
 export const pokemonReducer = (
    state: PokemonState,
@@ -15,6 +17,15 @@ export const pokemonReducer = (
          return { ...state, pokemons: action.payload };
       case 'updateSearch':
          return { ...state, search: action.payload };
+      case 'addFavorite':
+         return { ...state, favorites: [...state.favorites, action.payload] };
+      case 'removeFavorite':
+         return {
+            ...state,
+            favorites: state.favorites.filter(
+               (p) => p.id !== action.payload.id,
+            ),
+         };
       default:
          return state;
    }
