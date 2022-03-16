@@ -11,26 +11,32 @@ import { pokeColors, pokeTypes } from '../../utils/typeColor';
 import './gridCard.css';
 
 export const GridCards = () => {
+   // Clean search bar when changing tab
    useEffect(() => {
       return () => {
          updateSearch('');
       };
    }, []);
+   // Get data from context
    const { pokemonState, updateSearch } = useContext(PokemonContext);
    const { pokemons, search, isLoading } = pokemonState;
    const [count, setCount] = useState(1);
+   // Setting custom hook form and values
    const { values, handleInputChange } = useForm({
       filterType: 'all',
    });
+   // Setting custom hook form and values
    const { values: valueColor, handleInputChange: handleInputChangeColor } =
       useForm({
          filterColor: 'all',
       });
+   // Destructure data from hook
    const { filterType } = values;
    const { filterColor } = valueColor;
 
    let filterGenPokemons = useRef<Pokemon[]>(pokemons);
 
+   // Filter pokemons by type
    useEffect(() => {
       if (filterType === 'all') {
          filterGenPokemons.current = pokemons;
@@ -43,6 +49,7 @@ export const GridCards = () => {
       setCount(count + 1);
    }, [filterType, pokemons]);
 
+   // Filter pokemons by color
    useEffect(() => {
       if (filterColor === 'all') {
          filterGenPokemons.current = pokemons;
@@ -58,10 +65,12 @@ export const GridCards = () => {
       // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [filterColor, pokemons]);
 
+   // Filter pokemons by search
    let filterSearchPokemons: Pokemon[] = filterGenPokemons.current.filter((p) =>
       p.name.toLowerCase().includes(search.toLowerCase()),
    );
 
+   // Map pokemon cards by filters or search
    const pokeCards = filterGenPokemons.current.map((p) => {
       return (
          <Card

@@ -10,6 +10,7 @@ import { pokeColors, pokeTypes } from '../../utils/typeColor';
 import '../Grid/gridCard.css';
 
 export const Gen1Page = () => {
+   // Get data from context
    const { pokemonState, updateSearch } = useContext(PokemonContext);
    const { pokemons, search } = pokemonState;
    const [count, setCount] = useState(1);
@@ -20,8 +21,11 @@ export const Gen1Page = () => {
       useForm({
          filterColor: 'all',
       });
+   // Destructure data from hook
    const { filterType } = values;
    const { filterColor } = valueColor;
+
+   // Clean search bar when changing tab
    useEffect(() => {
       return () => {
          updateSearch('');
@@ -31,6 +35,8 @@ export const Gen1Page = () => {
    let filterGenPokemons = useRef<Pokemon[]>(
       pokemons.filter((p) => p.generation === 1),
    );
+
+   // Filter pokemons by type
    useEffect(() => {
       if (filterType === 'all') {
          filterGenPokemons.current = pokemons.filter((p) => p.generation === 1);
@@ -44,6 +50,7 @@ export const Gen1Page = () => {
       // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [filterType, pokemons]);
 
+   // Filter pokemons by color
    useEffect(() => {
       if (filterColor === 'all') {
          filterGenPokemons.current = pokemons.filter((p) => p.generation === 1);
@@ -58,10 +65,12 @@ export const Gen1Page = () => {
       // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [filterColor, pokemons]);
 
+   // Filter pokemons by search
    let filterSearchPokemons: Pokemon[] = filterGenPokemons.current.filter((p) =>
       p.name.toLowerCase().includes(search.toLowerCase()),
    );
 
+   // Map pokemon cards by filters or search
    const pokeCardsGen = filterGenPokemons.current.map((p) => {
       return (
          <Card

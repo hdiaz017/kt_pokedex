@@ -10,28 +10,34 @@ import { pokeColors, pokeTypes } from '../../utils/typeColor';
 import '../Grid/gridCard.css';
 
 export const Gen2Page = () => {
+   // Clean search bar when changing tab
    useEffect(() => {
       return () => {
          updateSearch('');
       };
    }, []);
 
+   // Get data from context
    const { pokemonState, updateSearch } = useContext(PokemonContext);
    const { pokemons, search } = pokemonState;
    const [count, setCount] = useState(1);
+   // Setting custom hook form and values
    const { values, handleInputChange } = useForm({
       filterType: 'all',
    });
+   // Setting custom hook form and values
    const { values: valueColor, handleInputChange: handleInputChangeColor } =
       useForm({
          filterColor: 'all',
       });
+   // Destructure data from hook
    const { filterType } = values;
    const { filterColor } = valueColor;
 
    let filterGenPokemons = useRef<Pokemon[]>(
       pokemons.filter((p) => p.generation === 2),
    );
+   // Filter pokemons by color
    useEffect(() => {
       if (filterType === 'all') {
          filterGenPokemons.current = pokemons.filter((p) => p.generation === 2);
@@ -43,7 +49,7 @@ export const Gen2Page = () => {
       }
       setCount(count + 1);
    }, [filterType, pokemons]);
-
+   // Filter pokemons by search
    useEffect(() => {
       if (filterColor === 'all') {
          filterGenPokemons.current = pokemons.filter((p) => p.generation === 2);
@@ -59,10 +65,12 @@ export const Gen2Page = () => {
       // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [filterColor, pokemons]);
 
+   // Filter pokemons by search
    let filterSearchPokemons: Pokemon[] = filterGenPokemons.current.filter((p) =>
       p.name.toLowerCase().includes(search.toLowerCase()),
    );
 
+   // Map pokemon cards by filters or search
    const pokeCardsGen = filterGenPokemons.current.map((p) => {
       return (
          <Card

@@ -16,7 +16,10 @@ const Initial_State: PokemonState = {
 };
 
 export const PokemonProvider = ({ children }: props) => {
+   // Define reducer with initial state
    const [pokemonState, dispatch] = useReducer(pokemonReducer, Initial_State);
+
+   // Define functions to export
    const addPokemons = (pokemons: Pokemon[]) => {
       dispatch({ type: 'addPokemons', payload: pokemons });
    };
