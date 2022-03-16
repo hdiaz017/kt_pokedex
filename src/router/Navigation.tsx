@@ -20,7 +20,7 @@ export const Navigation = () => {
                <Route path='pokemon/:id' element={<DetailCard />} />
                <Route path='home' element={<GridCards />} />
                <Route path='favorites' element={<FavoritesPage />} />
-               <Route path='/*' element={<Navigate to='/home' replace />} />
+               <Route path='/*' element={<Navigate to='/' replace />} />
             </Routes>
          </PokemonProvider>
       </BrowserRouter>
