@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { PokemonContext } from '../../context/PokemonContext';
 import pokeball from '../../img/pokeball_line.png';
@@ -8,6 +8,9 @@ export const DetailCard = () => {
    const { pokemonState } = useContext(PokemonContext);
    const { pokemons } = pokemonState;
    const { id } = useParams();
+   useEffect(() => {
+      window.scrollTo(0, 0);
+   }, []);
    const [pokemon] = pokemons.filter((p) => p.id.toString() === id);
    const gen1Class = pokemon.generation === 1 ? 'poke_ball_img1' : 'poke_ball';
    const gen2Class = pokemon.generation === 2 ? 'poke_ball_img2' : 'poke_ball';
@@ -17,7 +20,9 @@ export const DetailCard = () => {
          <h1>
             {pokemon.name} #{pokemon.id}
          </h1>
-         <div id='poke_detail_type'>{pokemon.type}</div>
+         <div id='poke_detail_type' style={{ backgroundColor: pokemon.color }}>
+            {pokemon.type}
+         </div>
          <img src={pokemon.picture} alt={pokemon.name} id='detail_img' />
          <div className='poke_detail_cards'>
             <div className='pokedex_info'>

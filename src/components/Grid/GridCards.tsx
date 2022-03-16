@@ -36,6 +36,7 @@ export const GridCards = () => {
             capture_rate={p.capture_rate}
             description={p.description}
             generation={p.generation}
+            color={p.color}
          />
       );
    });
@@ -54,6 +55,7 @@ export const GridCards = () => {
             capture_rate={p.capture_rate}
             description={p.description}
             generation={p.generation}
+            color={p.color}
          />
       );
    });

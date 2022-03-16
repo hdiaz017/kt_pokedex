@@ -37,6 +37,7 @@ export const Gen2Page = () => {
             capture_rate={p.capture_rate}
             description={p.description}
             generation={p.generation}
+            color={p.color}
          />
       );
    });
@@ -55,6 +56,7 @@ export const Gen2Page = () => {
             capture_rate={p.capture_rate}
             description={p.description}
             generation={p.generation}
+            color={p.color}
          />
       );
    });

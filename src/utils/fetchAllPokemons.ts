@@ -6,6 +6,7 @@ import {
    Pokemon,
    FetchAllPokemonResponse,
 } from '../interfaces/FetchPokemonInterfaces';
+import { typeColor } from './typeColor';
 
 // Get all pokemons name and url of data
 export const fetchAllPokemons = async (): Promise<Pokemon[]> => {
@@ -21,9 +22,7 @@ export const fetchAllPokemons = async (): Promise<Pokemon[]> => {
    });
 
    // Await promises and map to create new object with desired info
-   const results: Pokemon[] = await (
-      await Promise.all(promises)
-   ).map((p) => {
+   const results: Pokemon[] = (await Promise.all(promises)).map((p) => {
       return {
          id: p.id,
          name: p.name[0].toUpperCase() + p.name.slice(1),
@@ -40,6 +39,7 @@ export const fetchAllPokemons = async (): Promise<Pokemon[]> => {
          capture_rate: 0,
          description: '',
          generation: p.id < 152 ? 1 : 2,
+         color: typeColor[p.types[0].type.name],
       };
    });
 
